@@ -1,182 +1,684 @@
-
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PCH em Território Indígena — Análise Jurídica</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-* { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: var(--font-sans); }
 :root {
-  --c-danger: var(--color-background-danger);
-  --t-danger: var(--color-text-danger);
-  --c-warn: var(--color-background-warning);
-  --t-warn: var(--color-text-warning);
-  --c-ok: var(--color-background-success);
-  --t-ok: var(--color-text-success);
-  --c-info: var(--color-background-info);
-  --t-info: var(--color-text-info);
+  --terra-900: #1C1208;
+  --terra-800: #2E1F0E;
+  --terra-700: #4A3018;
+  --terra-600: #6B4423;
+  --terra-500: #8B5E34;
+  --terra-400: #B07D52;
+  --terra-300: #C9A07A;
+  --terra-200: #E0C4A0;
+  --terra-100: #F0DFC4;
+  --terra-50:  #FAF3E8;
+  --areia-100: #F5ECD8;
+  --areia-50:  #FBF7EF;
+  --ocre:      #C17F3A;
+  --ocre-dark: #9A5F1E;
+  --ocre-light:#E8C07A;
+  --critico:   #8B1A1A;
+  --critico-bg:#FDF0F0;
+  --critico-bd:#D9A0A0;
+  --grave:     #7A5000;
+  --grave-bg:  #FDF6E8;
+  --grave-bd:  #D4B060;
+  --relevante: #1A4A6B;
+  --relevante-bg:#EEF4FA;
+  --relevante-bd:#88AECB;
+  --ok-text:   #1E5C2A;
+  --ok-bg:     #EDF5EF;
+  --ok-bd:     #7BBB88;
+  --bg:        #F7F2EA;
+  --surface:   #FDFAF5;
+  --surface2:  #F3ECD9;
+  --border:    #D4C4A8;
+  --border-lt: #E6DCCB;
+  --text:      #1C1208;
+  --text-2:    #4A3018;
+  --text-3:    #7A6048;
+  --text-4:    #A08060;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
 }
-.wrap { padding: 1rem 0; }
-.header { margin-bottom: 1.5rem; }
-.case-title { font-size: 18px; font-weight: 500; color: var(--color-text-primary); }
-.case-sub { font-size: 13px; color: var(--color-text-secondary); margin-top: 4px; }
-.tabs { display: flex; gap: 4px; border-bottom: 0.5px solid var(--color-border-tertiary); margin-bottom: 1.25rem; flex-wrap: wrap; }
-.tab { padding: 7px 14px; font-size: 13px; border: none; background: none; cursor: pointer; color: var(--color-text-secondary); border-bottom: 2px solid transparent; margin-bottom: -0.5px; }
-.tab.active { color: var(--color-text-primary); border-bottom-color: var(--color-text-primary); font-weight: 500; }
-.panel { display: none; }
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Source Serif 4', Georgia, serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* ── LAYOUT ── */
+.page { max-width: 960px; margin: 0 auto; padding: 0 1.25rem 3rem; }
+
+/* ── HEADER ── */
+.masthead {
+  background: var(--terra-800);
+  padding: 0;
+  margin-bottom: 0;
+  border-bottom: 3px solid var(--ocre);
+}
+.masthead-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 1.25rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.masthead-left { flex: 1; min-width: 200px; }
+.masthead-eyebrow {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ocre-light);
+  margin-bottom: 6px;
+}
+.masthead-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 22px;
+  font-weight: 700;
+  color: #F5ECD8;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.masthead-title span { color: var(--ocre-light); }
+.masthead-sub {
+  font-size: 12px;
+  color: var(--terra-300);
+  margin-top: 5px;
+  font-style: italic;
+}
+.masthead-right {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-top: 4px;
+}
+.masthead-input {
+  font-family: 'Source Serif 4', serif;
+  font-size: 13px;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: var(--radius-md);
+  color: #F5ECD8;
+  padding: 7px 12px;
+  width: 200px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.masthead-input::placeholder { color: var(--terra-300); }
+.masthead-input:focus { border-color: var(--ocre-light); }
+.btn-resumo {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  background: var(--ocre);
+  color: #FBF7EF;
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 8px 14px;
+  cursor: pointer;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+.btn-resumo:hover { background: var(--ocre-dark); }
+
+/* ── METRICS BAND ── */
+.metrics-band {
+  background: var(--terra-700);
+  border-bottom: 1px solid var(--terra-600);
+  margin-bottom: 0;
+}
+.metrics-band-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+}
+.metric-cell {
+  padding: 14px 16px;
+  border-right: 1px solid rgba(255,255,255,0.08);
+  position: relative;
+}
+.metric-cell:last-child { border-right: none; }
+.metric-cell-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--terra-300);
+  margin-bottom: 5px;
+}
+.metric-cell-val {
+  font-family: 'Playfair Display', serif;
+  font-size: 26px;
+  font-weight: 600;
+  color: var(--areia-100);
+  line-height: 1;
+}
+.metric-cell-sub {
+  font-size: 11px;
+  color: var(--terra-300);
+  margin-top: 3px;
+}
+.metric-bar {
+  height: 3px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 2px;
+  margin-top: 8px;
+  overflow: hidden;
+}
+.metric-bar-fill {
+  height: 100%;
+  background: var(--ocre-light);
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+/* ── TABS ── */
+.tabs-bar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(28,18,8,0.06);
+}
+.tabs-inner {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.tabs-inner::-webkit-scrollbar { display: none; }
+.tab {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 13px 18px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--text-3);
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  white-space: nowrap;
+  transition: color 0.15s, border-color 0.15s;
+}
+.tab:hover { color: var(--text-2); }
+.tab.active {
+  color: var(--terra-700);
+  border-bottom-color: var(--ocre);
+  font-weight: 500;
+}
+
+/* ── PANEL ── */
+.panel { display: none; padding: 1.75rem 0; }
 .panel.active { display: block; }
-.metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; margin-bottom: 1.25rem; }
-.metric { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 12px 14px; }
-.metric-label { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 6px; }
-.metric-val { font-size: 22px; font-weight: 500; color: var(--color-text-primary); }
-.metric-sub { font-size: 11px; color: var(--color-text-secondary); margin-top: 3px; }
-.progress-bar { height: 4px; background: var(--color-border-tertiary); border-radius: 2px; margin-top: 8px; }
-.progress-fill { height: 100%; border-radius: 2px; background: var(--color-text-primary); transition: width 0.3s; }
-.section-title { font-size: 14px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 10px; }
-.vol-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 8px; margin-bottom: 1.5rem; }
-.vol-card { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 10px 8px; cursor: pointer; text-align: center; position: relative; transition: border-color 0.15s; }
-.vol-card:hover { border-color: var(--color-border-secondary); }
-.vol-card.lido { background: var(--color-background-success); border-color: var(--color-border-tertiary); }
-.vol-card.parcial { background: var(--color-background-warning); }
-.vol-card.critico { background: var(--color-background-danger); }
-.vol-card.pendente { background: var(--color-background-primary); }
-.vol-num { font-size: 13px; font-weight: 500; color: var(--color-text-primary); }
-.vol-status { font-size: 10px; color: var(--color-text-secondary); margin-top: 3px; }
-.vol-flag { position: absolute; top: 5px; right: 5px; width: 7px; height: 7px; border-radius: 50%; }
-.flag-ok { background: var(--color-text-success); }
-.flag-warn { background: var(--color-text-warning); }
-.flag-danger { background: var(--color-text-danger); }
-.vicio-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 1.25rem; }
-.vicio-item { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 12px 14px; background: var(--color-background-primary); }
-.vicio-header { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; flex-wrap: wrap; }
-.badge { font-size: 11px; padding: 3px 9px; border-radius: var(--border-radius-md); font-weight: 500; white-space: nowrap; }
-.badge-danger { background: var(--color-background-danger); color: var(--color-text-danger); }
-.badge-warn { background: var(--color-background-warning); color: var(--color-text-warning); }
-.badge-info { background: var(--color-background-info); color: var(--color-text-info); }
-.vicio-desc { font-size: 13px; color: var(--color-text-secondary); line-height: 1.5; }
-.vicio-ref { font-size: 11px; color: var(--color-text-tertiary); margin-top: 5px; }
-.add-form { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 14px; margin-bottom: 1.25rem; background: var(--color-background-secondary); }
-.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+
+/* ── SECTION TITLE ── */
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--terra-700);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border-lt);
+}
+
+/* ── LEGEND ── */
+.legend {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+.legend-dot {
+  width: 10px; height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* ── VOLUME GRID ── */
+.vol-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(88px, 1fr));
+  gap: 8px;
+  margin-bottom: 1.75rem;
+}
+.vol-card {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 11px 8px;
+  cursor: pointer;
+  text-align: center;
+  position: relative;
+  transition: border-color 0.15s, transform 0.1s, box-shadow 0.15s;
+  background: var(--surface);
+}
+.vol-card:hover {
+  border-color: var(--terra-400);
+  transform: translateY(-1px);
+  box-shadow: 0 3px 10px rgba(28,18,8,0.1);
+}
+.vol-card.lido { background: var(--ok-bg); border-color: var(--ok-bd); }
+.vol-card.parcial { background: var(--grave-bg); border-color: var(--grave-bd); }
+.vol-card.critico { background: var(--critico-bg); border-color: var(--critico-bd); }
+.vol-card.pendente { background: var(--surface); }
+.vol-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+}
+.vol-status {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-top: 4px;
+}
+.vol-flag {
+  position: absolute; top: 5px; right: 5px;
+  width: 7px; height: 7px; border-radius: 50%;
+}
+.flag-ok { background: var(--ok-text); }
+.flag-warn { background: var(--grave); }
+.flag-danger { background: var(--critico); }
+
+/* ── CARDS & FORMS ── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  margin-bottom: 1.25rem;
+}
+.card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--terra-700);
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border-lt);
+}
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
 .form-row.full { grid-template-columns: 1fr; }
-.form-label { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 4px; }
-input[type=text], select, textarea { width: 100%; font-size: 13px; }
-textarea { min-height: 70px; resize: vertical; }
-.btn { padding: 8px 16px; font-size: 13px; border: 0.5px solid var(--color-border-secondary); border-radius: var(--border-radius-md); cursor: pointer; background: var(--color-background-primary); color: var(--color-text-primary); }
-.btn:hover { background: var(--color-background-secondary); }
-.btn-primary { background: var(--color-text-primary); color: var(--color-background-primary); border-color: var(--color-text-primary); }
-.btn-primary:hover { opacity: 0.85; }
-.btn-sm { padding: 5px 11px; font-size: 12px; }
-.checklist { display: flex; flex-direction: column; gap: 6px; }
-.check-item { display: flex; align-items: flex-start; gap: 10px; padding: 10px 12px; border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); background: var(--color-background-primary); cursor: pointer; }
-.check-item.done { background: var(--color-background-success); }
-.check-icon { width: 18px; height: 18px; min-width: 18px; border: 0.5px solid var(--color-border-secondary); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 12px; margin-top: 1px; }
-.check-item.done .check-icon { background: var(--color-text-success); border-color: var(--color-text-success); color: var(--color-background-primary); }
-.check-text { font-size: 13px; color: var(--color-text-primary); line-height: 1.5; }
-.check-sub { font-size: 11px; color: var(--color-text-secondary); margin-top: 2px; }
-.note-area { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 10px 12px; font-size: 13px; width: 100%; min-height: 120px; background: var(--color-background-primary); color: var(--color-text-primary); }
-.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-.strategy-card { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 14px; background: var(--color-background-primary); }
-.strategy-card h3 { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 10px; }
-.strategy-item { font-size: 12px; color: var(--color-text-secondary); padding: 6px 0; border-bottom: 0.5px solid var(--color-border-tertiary); line-height: 1.5; }
-.strategy-item:last-child { border-bottom: none; }
-.send-btn { background: none; border: none; cursor: pointer; font-size: 13px; color: var(--color-text-info); padding: 2px 0; display: inline-flex; align-items: center; gap: 4px; }
-.divider { height: 0.5px; background: var(--color-border-tertiary); margin: 1.25rem 0; }
-@media(max-width: 600px) {
-  .metrics { grid-template-columns: repeat(2, minmax(0,1fr)); }
+.form-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-3);
+  margin-bottom: 5px;
+  display: block;
+}
+input[type=text], select, textarea {
+  width: 100%;
+  font-family: 'Source Serif 4', serif;
+  font-size: 13px;
+  color: var(--text);
+  background: var(--areia-50);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 10px;
+  outline: none;
+  transition: border-color 0.15s, background 0.15s;
+  appearance: none;
+}
+input[type=text]:focus, select:focus, textarea:focus {
+  border-color: var(--terra-400);
+  background: #fff;
+}
+textarea { min-height: 75px; resize: vertical; line-height: 1.5; }
+select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236B4423'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; padding-right: 28px; cursor: pointer; }
+
+/* ── BUTTONS ── */
+.btn {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 9px 18px;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-2);
+  transition: background 0.15s, border-color 0.15s;
+}
+.btn:hover { background: var(--areia-100); border-color: var(--terra-300); }
+.btn-primary {
+  background: var(--terra-700);
+  color: var(--areia-100);
+  border-color: var(--terra-700);
+}
+.btn-primary:hover { background: var(--terra-600); border-color: var(--terra-600); }
+.btn-sm { padding: 6px 12px; font-size: 10px; }
+.link-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.05em;
+  color: var(--ocre-dark);
+  padding: 2px 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 3px;
+  transition: color 0.15s;
+}
+.link-btn:hover { color: var(--terra-600); }
+
+/* ── BADGES ── */
+.badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  white-space: nowrap;
+  border: 1px solid transparent;
+}
+.badge-danger { background: var(--critico-bg); color: var(--critico); border-color: var(--critico-bd); }
+.badge-warn { background: var(--grave-bg); color: var(--grave); border-color: var(--grave-bd); }
+.badge-info { background: var(--relevante-bg); color: var(--relevante); border-color: var(--relevante-bd); }
+
+/* ── VÍCIO ITEMS ── */
+.vicio-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 1.25rem; }
+.vicio-item {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  transition: border-color 0.15s;
+}
+.vicio-item[data-grav="critico"] { border-left-color: var(--critico); }
+.vicio-item[data-grav="grave"] { border-left-color: var(--grave); }
+.vicio-item[data-grav="relevante"] { border-left-color: var(--relevante); }
+.vicio-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; flex-wrap: wrap; }
+.vicio-tipo { font-size: 13px; font-weight: 600; color: var(--text); font-family: 'Source Serif 4', serif; }
+.vicio-desc { font-size: 13px; color: var(--text-2); line-height: 1.6; font-style: italic; }
+.vicio-ref {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-4);
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid var(--border-lt);
+  letter-spacing: 0.03em;
+}
+
+/* ── CHECKLIST ── */
+.checklist { display: flex; flex-direction: column; gap: 7px; }
+.check-item {
+  display: flex; align-items: flex-start; gap: 12px;
+  padding: 11px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+.check-item:hover { background: var(--areia-100); }
+.check-item.done { background: var(--ok-bg); border-color: var(--ok-bd); }
+.check-icon {
+  width: 19px; height: 19px; min-width: 19px;
+  border: 1.5px solid var(--border);
+  border-radius: 3px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  margin-top: 1px;
+  color: transparent;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.check-item.done .check-icon {
+  background: var(--ok-text);
+  border-color: var(--ok-text);
+  color: white;
+}
+.check-text { font-size: 13px; color: var(--text); line-height: 1.5; }
+.check-sub {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  color: var(--text-4);
+  margin-top: 3px;
+  letter-spacing: 0.04em;
+}
+
+/* ── STRATEGY GRID ── */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+.strategy-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px;
+  display: flex;
+  flex-direction: column;
+}
+.strategy-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--terra-700);
+  margin-bottom: 12px;
+  padding-bottom: 9px;
+  border-bottom: 1px solid var(--border-lt);
+}
+.strategy-item {
+  font-size: 12.5px;
+  color: var(--text-2);
+  padding: 7px 0;
+  border-bottom: 1px solid var(--border-lt);
+  line-height: 1.55;
+}
+.strategy-item:last-of-type { border-bottom: none; }
+.divider { height: 1px; background: var(--border-lt); margin: 1.25rem 0; }
+
+/* ── NOTAS ── */
+.note-area {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  font-family: 'Source Serif 4', serif;
+  font-size: 13px;
+  width: 100%;
+  min-height: 140px;
+  background: var(--areia-50);
+  color: var(--text);
+  resize: vertical;
+  line-height: 1.6;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.note-area:focus { border-color: var(--terra-400); background: #fff; }
+
+/* ── VOL DETAIL ── */
+.vol-detail-panel {
+  display: none;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--ocre);
+  border-radius: var(--radius-lg);
+  padding: 18px 20px;
+  margin-bottom: 1.25rem;
+}
+
+/* ── FOOTER BAND ── */
+.footer-band {
+  background: var(--terra-900);
+  text-align: center;
+  padding: 16px;
+  margin-top: 3rem;
+}
+.footer-band p {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--terra-400);
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width: 640px) {
+  .metrics-band-inner { grid-template-columns: repeat(2, 1fr); }
   .two-col { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .masthead-title { font-size: 18px; }
 }
 </style>
+</head>
+<body>
 
-<div class="wrap">
-  <div class="header">
-    <div style="display:flex; align-items:flex-start; justify-content:space-between; flex-wrap:wrap; gap:10px;">
-      <div>
-        <div class="case-title" id="case-name-display">PCH em Território Indígena</div>
-        <div class="case-sub">Análise jurídica · Amicus Curiae · MPF como autor</div>
-      </div>
-      <div style="display:flex;gap:6px;align-items:center;">
-        <input type="text" id="case-name-input" placeholder="Nome do caso..." style="font-size:13px;width:200px;" oninput="document.getElementById('case-name-display').textContent=this.value||'PCH em Território Indígena'">
-        <button class="btn btn-sm" onclick="sendPrompt('Gere um resumo executivo do caso PCH em terras indígenas com os principais argumentos jurídicos para amicus curiae')">Resumo ↗</button>
-      </div>
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="masthead-inner">
+    <div class="masthead-left">
+      <div class="masthead-eyebrow">Dossiê Jurídico · Licenciamento Ambiental · Terras Indígenas</div>
+      <div class="masthead-title" id="case-name-display">PCH em <span>Território Indígena</span></div>
+      <div class="masthead-sub">Análise de vícios · Amicus Curiae · MPF como autor da ação</div>
+    </div>
+    <div class="masthead-right">
+      <input class="masthead-input" type="text" id="case-name-input" placeholder="Identificar o caso..." oninput="document.getElementById('case-name-display').innerHTML=this.value?('PCH em <span>'+this.value+'</span>'):'PCH em <span>Território Indígena</span>'">
+      <button class="btn-resumo" onclick="window.open('https://claude.ai','_blank')">Resumo ↗</button>
     </div>
   </div>
+</header>
 
-  <div class="tabs">
-    <button class="tab active" onclick="switchTab('volumes')">Volumes</button>
-    <button class="tab" onclick="switchTab('vicios')">Vícios</button>
-    <button class="tab" onclick="switchTab('checklist')">Checklist</button>
-    <button class="tab" onclick="switchTab('estrategia')">Estratégia</button>
-    <button class="tab" onclick="switchTab('campo')">Campo</button>
-    <button class="tab" onclick="switchTab('notas')">Notas</button>
+<!-- METRICS BAND -->
+<div class="metrics-band">
+  <div class="metrics-band-inner">
+    <div class="metric-cell">
+      <div class="metric-cell-label">Volumes totais</div>
+      <div class="metric-cell-val">20</div>
+      <div class="metric-cell-sub">75 arquivos · ~300 p. cada</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-cell-label">Lidos</div>
+      <div class="metric-cell-val" id="m-lidos">0</div>
+      <div class="metric-cell-sub" id="m-lidos-pct">0% concluído</div>
+      <div class="metric-bar"><div class="metric-bar-fill" id="prog-lidos" style="width:0%"></div></div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-cell-label">Vícios registrados</div>
+      <div class="metric-cell-val" id="m-vicios">3</div>
+      <div class="metric-cell-sub">fundamentos mapeados</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-cell-label">Checklist</div>
+      <div class="metric-cell-val" id="m-check">0%</div>
+      <div class="metric-cell-sub">verificações concluídas</div>
+      <div class="metric-bar"><div class="metric-bar-fill" id="prog-check" style="width:0%"></div></div>
+    </div>
   </div>
+</div>
 
+<!-- TABS -->
+<div class="tabs-bar">
+  <div class="tabs-inner">
+    <button class="tab active" onclick="switchTab('volumes',this)">I. Volumes</button>
+    <button class="tab" onclick="switchTab('vicios',this)">II. Vícios</button>
+    <button class="tab" onclick="switchTab('checklist',this)">III. Checklist</button>
+    <button class="tab" onclick="switchTab('estrategia',this)">IV. Estratégia</button>
+    <button class="tab" onclick="switchTab('campo',this)">V. Campo</button>
+    <button class="tab" onclick="switchTab('notas',this)">VI. Notas</button>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- VOLUMES -->
   <div id="tab-volumes" class="panel active">
-    <div class="metrics">
-      <div class="metric">
-        <div class="metric-label">Volumes totais</div>
-        <div class="metric-val">20</div>
-        <div class="metric-sub">75 arquivos</div>
-      </div>
-      <div class="metric">
-        <div class="metric-label">Lidos</div>
-        <div class="metric-val" id="m-lidos">0</div>
-        <div class="metric-sub" id="m-lidos-pct">0%</div>
-        <div class="progress-bar"><div class="progress-fill" id="prog-lidos" style="width:0%"></div></div>
-      </div>
-      <div class="metric">
-        <div class="metric-label">Vícios encontrados</div>
-        <div class="metric-val" id="m-vicios">3</div>
-        <div class="metric-sub">registrados</div>
-      </div>
-      <div class="metric">
-        <div class="metric-label">Checklist</div>
-        <div class="metric-val" id="m-check">0%</div>
-        <div class="metric-sub">concluído</div>
-        <div class="progress-bar"><div class="progress-fill" id="prog-check" style="width:0%"></div></div>
-      </div>
-    </div>
-
-    <div class="section-title">Progresso por volume</div>
-    <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px;font-size:12px;color:var(--color-text-secondary);">
-      <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;background:var(--color-text-success);border-radius:2px;display:inline-block;"></span>Lido</span>
-      <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;background:var(--color-text-warning);border-radius:2px;display:inline-block;"></span>Parcial</span>
-      <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;background:var(--color-text-danger);border-radius:2px;display:inline-block;"></span>Vícios críticos</span>
-      <span style="display:flex;align-items:center;gap:5px;"><span style="width:10px;height:10px;background:var(--color-border-secondary);border-radius:2px;display:inline-block;"></span>Pendente</span>
+    <div class="legend">
+      <span class="legend-item"><span class="legend-dot" style="background:var(--ok-text)"></span>Lido</span>
+      <span class="legend-item"><span class="legend-dot" style="background:var(--grave)"></span>Parcial</span>
+      <span class="legend-item"><span class="legend-dot" style="background:var(--critico)"></span>Vícios críticos</span>
+      <span class="legend-item"><span class="legend-dot" style="background:var(--border)"></span>Pendente</span>
     </div>
     <div class="vol-grid" id="vol-grid"></div>
-
-    <div id="vol-detail" style="display:none;" class="add-form">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-        <div class="section-title" style="margin:0;" id="vol-detail-title">Volume 1</div>
+    <div id="vol-detail" class="vol-detail-panel">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
+        <div class="section-title" style="margin:0;font-size:14px;" id="vol-detail-title">Volume 1</div>
         <button class="btn btn-sm" onclick="document.getElementById('vol-detail').style.display='none'">Fechar</button>
       </div>
       <div class="form-row">
-        <div>
-          <div class="form-label">Status</div>
+        <div><label class="form-label">Status</label>
           <select id="vol-status-sel">
             <option value="pendente">Pendente</option>
-            <option value="parcial">Parcial</option>
-            <option value="lido">Lido</option>
-            <option value="critico">Crítico (vícios)</option>
+            <option value="parcial">Leitura parcial</option>
+            <option value="lido">Lido integralmente</option>
+            <option value="critico">Crítico — vícios identificados</option>
           </select>
         </div>
-        <div>
-          <div class="form-label">Arquivos neste volume</div>
-          <input type="text" id="vol-files" placeholder="Ex: 3-4 arquivos">
+        <div><label class="form-label">Arquivos neste volume</label>
+          <input type="text" id="vol-files" placeholder="Ex: arq. 01 a 04">
         </div>
       </div>
       <div class="form-row full">
-        <div>
-          <div class="form-label">Observações</div>
-          <textarea id="vol-obs" placeholder="Notas, páginas relevantes, vícios identificados..."></textarea>
+        <div><label class="form-label">Observações e páginas relevantes</label>
+          <textarea id="vol-obs" placeholder="Notas, páginas relevantes, vícios identificados, referências cruzadas..."></textarea>
         </div>
       </div>
-      <button class="btn btn-primary" onclick="saveVol()">Salvar</button>
+      <button class="btn btn-primary" onclick="saveVol()">Salvar registro</button>
     </div>
   </div>
 
+  <!-- VÍCIOS -->
   <div id="tab-vicios" class="panel">
-    <div class="add-form">
-      <div class="section-title" style="margin-bottom:12px;">Registrar vício ou irregularidade</div>
+    <div class="card">
+      <div class="card-title">Registrar vício ou irregularidade</div>
       <div class="form-row">
-        <div>
-          <div class="form-label">Tipo de vício</div>
+        <div><label class="form-label">Tipo de vício</label>
           <select id="v-tipo">
             <option>Ausência de consulta prévia (Conv. 169 OIT)</option>
             <option>EIA/RIMA irregular ou insuficiente</option>
@@ -189,49 +691,46 @@ textarea { min-height: 70px; resize: vertical; }
             <option>Outro</option>
           </select>
         </div>
-        <div>
-          <div class="form-label">Gravidade</div>
+        <div><label class="form-label">Gravidade jurídica</label>
           <select id="v-grav">
-            <option value="critico">Crítico — nulidade</option>
+            <option value="critico">Crítico — nulidade absoluta</option>
             <option value="grave">Grave — anulabilidade</option>
             <option value="relevante">Relevante — irregularidade</option>
           </select>
         </div>
       </div>
       <div class="form-row">
-        <div>
-          <div class="form-label">Volume / Arquivo / Página</div>
+        <div><label class="form-label">Volume / Arquivo / Página</label>
           <input type="text" id="v-ref" placeholder="Vol. 3, Arq. 12, p. 45">
         </div>
-        <div>
-          <div class="form-label">Fundamento jurídico</div>
+        <div><label class="form-label">Fundamento jurídico</label>
           <input type="text" id="v-fund" placeholder="Art. 6º Conv. 169 OIT; art. 231 CF">
         </div>
       </div>
       <div class="form-row full">
-        <div>
-          <div class="form-label">Descrição do vício</div>
-          <textarea id="v-desc" placeholder="Descreva o vício, como foi identificado e seu impacto para o processo..."></textarea>
+        <div><label class="form-label">Descrição fundamentada do vício</label>
+          <textarea id="v-desc" placeholder="Descreva o vício, como foi identificado, consequências processuais e impacto para as comunidades indígenas..."></textarea>
         </div>
       </div>
-      <div style="display:flex;gap:8px;">
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
         <button class="btn btn-primary" onclick="addVicio()">Registrar vício</button>
-        <button class="send-btn" onclick="sendPrompt('Com base no seguinte vício identificado: ausência de consulta prévia (Convenção 169 OIT), quais são os argumentos jurídicos mais sólidos para invalidar o licenciamento da PCH?')">Analisar argumento ↗</button>
+        <button class="link-btn" onclick="window.open('https://claude.ai','_blank')">Analisar fundamento ↗</button>
       </div>
     </div>
-
     <div class="section-title">Vícios registrados</div>
     <div class="vicio-list" id="vicio-list"></div>
   </div>
 
+  <!-- CHECKLIST -->
   <div id="tab-checklist" class="panel">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-      <div class="section-title" style="margin:0;">Lista de verificação jurídica</div>
-      <button class="send-btn" onclick="sendPrompt('Liste todos os documentos e procedimentos obrigatórios para licenciamento de PCH em terras indígenas no Brasil, incluindo Convenção 169 OIT, art. 231 CF/88, Lei 9.985/2000 e normas da ANEEL')">Complementar ↗</button>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:8px;">
+      <div class="section-title" style="margin:0;">Verificação jurídica obrigatória</div>
+      <button class="link-btn" onclick="window.open('https://claude.ai','_blank')">Complementar lista ↗</button>
     </div>
     <div class="checklist" id="checklist"></div>
   </div>
 
+  <!-- ESTRATÉGIA -->
   <div id="tab-estrategia" class="panel">
     <div class="two-col">
       <div class="strategy-card">
@@ -241,7 +740,7 @@ textarea { min-height: 70px; resize: vertical; }
         <div class="strategy-item">Incompetência da SEMA: empreendimento com impacto em TI exige IBAMA + Funai (LC 140/2011; IN Funai 02/2015)</div>
         <div class="strategy-item">Violação do direito ao território e usufruto exclusivo (art. 231 §2º CF; Dec. 5.051/2004)</div>
         <div class="strategy-item">Dano socioambiental irreversível — princípio da precaução e inversão do ônus da prova</div>
-        <button class="send-btn" style="margin-top:10px;" onclick="sendPrompt('Elabore argumentação jurídica detalhada sobre a obrigatoriedade da consulta prévia aos povos indígenas no licenciamento de PCH, com base na Convenção 169 OIT, jurisprudência do STF e do STJ')">Expandir argumentação ↗</button>
+        <button class="link-btn" style="margin-top:12px;" onclick="window.open('https://claude.ai','_blank')">Expandir argumentação ↗</button>
       </div>
       <div class="strategy-card">
         <h3>Pedidos para o amicus curiae</h3>
@@ -251,7 +750,7 @@ textarea { min-height: 70px; resize: vertical; }
         <div class="strategy-item">Realização de consulta prévia conforme protocolo comunitário do povo afetado</div>
         <div class="strategy-item">Reparação integral dos danos socioambientais (dano material + moral coletivo)</div>
         <div class="strategy-item">Responsabilização solidária do empreendedor e do Estado (SEMA)</div>
-        <button class="send-btn" style="margin-top:10px;" onclick="sendPrompt('Redija minutas dos pedidos principais e alternativos para amicus curiae em ação do MPF sobre PCH em terras indígenas com licenciamento nulo')">Minutar pedidos ↗</button>
+        <button class="link-btn" style="margin-top:12px;" onclick="window.open('https://claude.ai','_blank')">Minutar pedidos ↗</button>
       </div>
     </div>
     <div class="divider"></div>
@@ -264,7 +763,7 @@ textarea { min-height: 70px; resize: vertical; }
         <div class="strategy-item">Documentação da Funai sobre consulta e anuência</div>
         <div class="strategy-item">Laudos antropológicos e etnobotânicos</div>
         <div class="strategy-item">Histórico de alterações no estudo de impacto</div>
-        <button class="send-btn" style="margin-top:10px;" onclick="sendPrompt('Quais são os requisitos legais para realização de perícia ambiental em terras indígenas afetadas por PCH e como ela deve ser conduzida?')">Detalhes da perícia ↗</button>
+        <button class="link-btn" style="margin-top:12px;" onclick="window.open('https://claude.ai','_blank')">Detalhes da perícia ↗</button>
       </div>
       <div class="strategy-card">
         <h3>Jurisprudência prioritária</h3>
@@ -274,66 +773,68 @@ textarea { min-height: 70px; resize: vertical; }
         <div class="strategy-item">CIDH — caso Saramaka vs. Suriname</div>
         <div class="strategy-item">Corte IDH — caso Povo Sarayaku vs. Equador</div>
         <div class="strategy-item">ADPF 709 (STF — direitos territoriais indígenas)</div>
-        <button class="send-btn" style="margin-top:10px;" onclick="sendPrompt('Quais são os principais precedentes do STF e do STJ sobre consulta prévia a povos indígenas e licenciamento de obras de infraestrutura em terras indígenas?')">Pesquisar jurisprudência ↗</button>
+        <button class="link-btn" style="margin-top:12px;" onclick="window.open('https://claude.ai','_blank')">Pesquisar jurisprudência ↗</button>
       </div>
     </div>
   </div>
 
+  <!-- CAMPO -->
   <div id="tab-campo" class="panel">
-    <div class="add-form">
-      <div class="section-title" style="margin-bottom:12px;">Registrar relato de campo</div>
+    <div class="card">
+      <div class="card-title">Registrar relato de campo</div>
       <div class="form-row">
-        <div>
-          <div class="form-label">Comunidade / Liderança</div>
+        <div><label class="form-label">Comunidade / Liderança</label>
           <input type="text" id="c-pessoa" placeholder="Nome ou cargo">
         </div>
-        <div>
-          <div class="form-label">Data do depoimento</div>
+        <div><label class="form-label">Data do depoimento</label>
           <input type="text" id="c-data" placeholder="DD/MM/AAAA">
         </div>
       </div>
       <div class="form-row full">
-        <div>
-          <div class="form-label">Conteúdo do depoimento / anseios expressos</div>
-          <textarea id="c-dep" placeholder="Registre o que foi dito, o que o povo indígena espera, impactos relatados..."></textarea>
+        <div><label class="form-label">Conteúdo do depoimento / anseios expressos</label>
+          <textarea id="c-dep" placeholder="Registre o que foi dito, o que o povo indígena espera, impactos relatados, linguagem e termos usados..."></textarea>
         </div>
       </div>
       <div class="form-row">
-        <div>
-          <div class="form-label">Impactos relatados</div>
-          <input type="text" id="c-imp" placeholder="Pesca, território, saúde...">
+        <div><label class="form-label">Impactos relatados</label>
+          <input type="text" id="c-imp" placeholder="Pesca, território, saúde, rituais...">
         </div>
-        <div>
-          <div class="form-label">Posicionamento sobre a PCH</div>
+        <div><label class="form-label">Posicionamento sobre a PCH</label>
           <select id="c-pos">
-            <option>Contrário — quer paralisação</option>
-            <option>Contrário — quer reparação</option>
-            <option>Condicionado — exige consulta</option>
+            <option>Contrário — quer paralisação imediata</option>
+            <option>Contrário — quer reparação integral</option>
+            <option>Condicionado — exige consulta prévia</option>
             <option>Não informado</option>
           </select>
         </div>
       </div>
-      <div style="display:flex;gap:8px;">
+      <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
         <button class="btn btn-primary" onclick="addRelato()">Salvar relato</button>
-        <button class="send-btn" onclick="sendPrompt('Com base nos depoimentos indígenas coletados em campo, como estruturar a prova testemunhal para uma ação do MPF sobre PCH em terras indígenas, considerando o direito ao silêncio e a proteção dos depoentes?')">Orientação probatória ↗</button>
+        <button class="link-btn" onclick="window.open('https://claude.ai','_blank')">Orientação probatória ↗</button>
       </div>
     </div>
     <div class="section-title">Relatos coletados</div>
-    <div id="relatos-list" style="display:flex;flex-direction:column;gap:8px;"></div>
+    <div id="relatos-list" style="display:flex;flex-direction:column;gap:10px;"></div>
   </div>
 
+  <!-- NOTAS -->
   <div id="tab-notas" class="panel">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-      <div class="section-title" style="margin:0;">Notas jurídicas livres</div>
-      <button class="send-btn" onclick="sendPrompt('Quais são as etapas para peticionamento de amicus curiae em ação do MPF na Justiça Federal, incluindo prazos e requisitos formais?')">Como peticionar ↗</button>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:8px;">
+      <div class="section-title" style="margin:0;">Notas jurídicas</div>
+      <button class="link-btn" onclick="window.open('https://claude.ai','_blank')">Como peticionar ↗</button>
     </div>
-    <textarea class="note-area" id="notas-text" placeholder="Use este espaço para anotações gerais, hipóteses jurídicas, pontos de atenção, cronograma..."></textarea>
-    <div style="margin-top:8px;display:flex;gap:8px;">
-      <button class="btn btn-sm" onclick="saveNota()">Salvar nota</button>
-      <button class="send-btn" onclick="sendPrompt('Com base nas irregularidades identificadas no licenciamento de PCH em terras indígenas pela SEMA, elabore uma estrutura de petição inicial de amicus curiae para ser juntada à ação do MPF')">Estruturar petição ↗</button>
+    <textarea class="note-area" id="notas-text" placeholder="Anotações gerais, hipóteses jurídicas, pontos de atenção, cronograma, articulações estratégicas..."></textarea>
+    <div style="margin-top:10px;display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+      <button class="btn btn-primary" onclick="saveNota()">Salvar nota</button>
+      <button class="link-btn" onclick="window.open('https://claude.ai','_blank')">Estruturar petição ↗</button>
     </div>
-    <div style="margin-top:1rem;" id="notas-saved"></div>
+    <div style="margin-top:1.25rem;" id="notas-saved"></div>
   </div>
+
+</div><!-- /page -->
+
+<div class="footer-band">
+  <p>Dossiê jurídico — uso interno restrito — PCH em território indígena</p>
 </div>
 
 <script>
@@ -365,11 +866,11 @@ const state = {
   selectedVol: null,
 };
 
-function switchTab(id) {
+function switchTab(id, el) {
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
   document.getElementById('tab-'+id).classList.add('active');
-  event.target.classList.add('active');
+  el.classList.add('active');
 }
 
 function renderVolumes() {
@@ -384,13 +885,14 @@ function renderVolumes() {
     if(v.status==='critico') flag='<div class="vol-flag flag-danger"></div>';
     else if(v.status==='parcial') flag='<div class="vol-flag flag-warn"></div>';
     else if(v.status==='lido') flag='<div class="vol-flag flag-ok"></div>';
-    d.innerHTML = flag+'<div class="vol-num">Vol. '+v.num+'</div><div class="vol-status">'+(v.status==='pendente'?'pendente':v.status==='lido'?'lido':v.status==='parcial'?'parcial':'crítico')+'</div>';
+    const statusLabel = {pendente:'pendente',lido:'lido',parcial:'parcial',critico:'crítico'}[v.status]||'pendente';
+    d.innerHTML = flag+'<div class="vol-num">Vol. '+v.num+'</div><div class="vol-status">'+statusLabel+'</div>';
     d.onclick = ()=>openVol(v.num);
     grid.appendChild(d);
   });
   const pct = Math.round(lidos/20*100);
   document.getElementById('m-lidos').textContent = lidos;
-  document.getElementById('m-lidos-pct').textContent = pct+'%';
+  document.getElementById('m-lidos-pct').textContent = pct+'% concluído';
   document.getElementById('prog-lidos').style.width = pct+'%';
 }
 
@@ -401,8 +903,9 @@ function openVol(num) {
   document.getElementById('vol-status-sel').value = v.status||'pendente';
   document.getElementById('vol-files').value = v.files||'';
   document.getElementById('vol-obs').value = v.obs||'';
-  document.getElementById('vol-detail').style.display = 'block';
-  document.getElementById('vol-detail').scrollIntoView({behavior:'smooth',block:'nearest'});
+  const panel = document.getElementById('vol-detail');
+  panel.style.display = 'block';
+  panel.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 
 function saveVol() {
@@ -417,12 +920,13 @@ function saveVol() {
 function renderVicios() {
   const list = document.getElementById('vicio-list');
   list.innerHTML = '';
-  state.vicios.forEach((v,i)=>{
+  state.vicios.forEach(v=>{
     const gravClass = v.grav==='critico'?'badge-danger':v.grav==='grave'?'badge-warn':'badge-info';
     const gravLabel = v.grav==='critico'?'Crítico — nulidade':v.grav==='grave'?'Grave — anulabilidade':'Relevante';
     const el = document.createElement('div');
     el.className = 'vicio-item';
-    el.innerHTML = '<div class="vicio-header"><span class="badge '+gravClass+'">'+gravLabel+'</span><span style="font-size:13px;font-weight:500;color:var(--color-text-primary);">'+v.tipo+'</span></div><div class="vicio-desc">'+v.desc+'</div><div class="vicio-ref">Ref.: '+v.ref+' &nbsp;|&nbsp; '+v.fund+'</div>';
+    el.setAttribute('data-grav', v.grav);
+    el.innerHTML = '<div class="vicio-header"><span class="badge '+gravClass+'">'+gravLabel+'</span><span class="vicio-tipo">'+v.tipo+'</span></div><div class="vicio-desc">'+v.desc+'</div><div class="vicio-ref">Ref.: '+v.ref+' &nbsp;·&nbsp; '+v.fund+'</div>';
     list.appendChild(el);
   });
   document.getElementById('m-vicios').textContent = state.vicios.length;
@@ -447,7 +951,7 @@ function renderChecklist() {
   const list = document.getElementById('checklist');
   list.innerHTML = '';
   let done = 0;
-  state.checklist.forEach((item,i)=>{
+  state.checklist.forEach((item)=>{
     if(item.done) done++;
     const el = document.createElement('div');
     el.className = 'check-item'+(item.done?' done':'');
@@ -469,21 +973,22 @@ function addRelato() {
     pos: document.getElementById('c-pos').value,
   };
   state.relatos.unshift(r);
-  document.getElementById('c-pessoa').value='';
-  document.getElementById('c-data').value='';
-  document.getElementById('c-dep').value='';
-  document.getElementById('c-imp').value='';
+  ['c-pessoa','c-data','c-dep','c-imp'].forEach(id=>document.getElementById(id).value='');
   renderRelatos();
 }
 
 function renderRelatos() {
   const list = document.getElementById('relatos-list');
   list.innerHTML='';
-  if(!state.relatos.length){list.innerHTML='<div style="font-size:13px;color:var(--color-text-secondary);">Nenhum relato registrado ainda.</div>';return;}
+  if(!state.relatos.length){
+    list.innerHTML='<div style="font-size:13px;color:var(--text-4);font-style:italic;">Nenhum relato registrado ainda.</div>';
+    return;
+  }
   state.relatos.forEach(r=>{
     const el = document.createElement('div');
     el.className='vicio-item';
-    el.innerHTML='<div class="vicio-header"><span class="badge badge-info">'+r.data+'</span><span style="font-size:13px;font-weight:500;color:var(--color-text-primary);">'+r.pessoa+'</span></div><div class="vicio-desc">'+r.dep+'</div><div class="vicio-ref">Impactos: '+r.imp+' &nbsp;|&nbsp; Posição: '+r.pos+'</div>';
+    el.setAttribute('data-grav','relevante');
+    el.innerHTML='<div class="vicio-header"><span class="badge badge-info">'+r.data+'</span><span class="vicio-tipo">'+r.pessoa+'</span></div><div class="vicio-desc">'+r.dep+'</div><div class="vicio-ref">Impactos: '+r.imp+' &nbsp;·&nbsp; Posição: '+r.pos+'</div>';
     list.appendChild(el);
   });
 }
@@ -502,7 +1007,8 @@ function renderNotas() {
   state.notas.forEach(n=>{
     const el = document.createElement('div');
     el.className='vicio-item';
-    el.innerHTML='<div class="vicio-ref" style="margin-bottom:5px;">'+n.date+'</div><div class="vicio-desc">'+n.txt+'</div>';
+    el.setAttribute('data-grav','relevante');
+    el.innerHTML='<div class="vicio-ref" style="margin-bottom:6px;">'+n.date+'</div><div class="vicio-desc" style="font-style:normal;">'+n.txt+'</div>';
     list.appendChild(el);
   });
 }
@@ -512,3 +1018,5 @@ renderVicios();
 renderChecklist();
 renderRelatos();
 </script>
+</body>
+</html>
